@@ -42,7 +42,6 @@ const GetUser = () => {
         <thead>
             <tr>
             <td><b>SNo.</b></td>
-            <td><b>Image</b></td>
             <td><b>Name</b></td>
             <td><b>Email</b></td>
             <td><b>Phone</b></td>
@@ -57,7 +56,6 @@ const GetUser = () => {
                 users.map((user,index)=>(
                     <tr key={index}>
                     <td>{index+1}</td>
-                    <td><img src={"http://localhost/school/upload/"+user.photo} width="60" height="60"/></td>
                     <td>{user.name}</td>
                     <td>{user.email}</td>
                     <td>{user.phone}</td>

@@ -9,7 +9,6 @@ const UserRegister=() => {
     const [password,setPassword]=useState('');
     const [phone,setPhone]=useState('');
     const [city,setCity]=useState('');
-    const [image,setImage]=useState('');
     const [msg,setMsg]=useState('');
 
 
@@ -72,10 +71,6 @@ const UserRegister=() => {
     <div class="mb-3">
     <label for="exampleFormControlInput1" class="form-label">City</label>
     <input type="text" class="form-control" value={city} onChange={(e)=>setCity(e.target.value)}/>
-    </div>
-    <div class="mb-3">
-    <label for="exampleFormControlInput1" class="form-label">Image</label>
-    <input type="file" class="form-control"  onChange={(e)=>setImage(e.target.files[0])}/>
     </div>
     <div class="mb-3">
     
