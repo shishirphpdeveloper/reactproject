@@ -9,7 +9,7 @@ const Detailview = () => {
     useEffect(()=>{
         const viewdata=async()=>{
             try{
-                const response = await axios.get(`http://localhost/school/fetch.php?id=${id}`);
+                const response = await axios.get(`http://localhost/school/fetchUser.php?id=${id}`);
                 const {name, email, phone, city}=response.data;
                 setFormValue({name, email, phone, city});
             }

@@ -1,13 +1,14 @@
 import React,{useEffect,useState} from "react";
 import axios from "axios";
 import {Link} from "react-router-dom";
+import Navbar from "./Navbar";
 
 const GetUser = () => {
     const [users,setUsers]=useState([]);
     const [msg,setMsg]=useState();
 
     const userlist = async() => {
-        const response = await axios.get("http://localhost/school/fetchAll.php");
+        const response = await axios.get("http://localhost/school/fetchUsers.php");
         setUsers(response.data.records);
     }
     
@@ -21,7 +22,7 @@ const GetUser = () => {
 
     const deleteUser = async(id)=>{
         try{
-            const response = await axios.delete(`http://localhost/school/delete.php?id=${id}`);
+            const response = await axios.delete(`http://localhost/school/deleteUser.php?id=${id}`);
             setMsg('Record Deleted');
             userlist();
         }
@@ -42,6 +43,7 @@ const GetUser = () => {
         <thead>
             <tr>
             <td><b>SNo.</b></td>
+            <td><b>Image</b></td>
             <td><b>Name</b></td>
             <td><b>Email</b></td>
             <td><b>Phone</b></td>
@@ -56,6 +58,7 @@ const GetUser = () => {
                 users.map((user,index)=>(
                     <tr key={index}>
                     <td>{index+1}</td>
+                    <td><img src={"http://localhost/school/upload/"+user.photo} width="60" height="60"/></td>
                     <td>{user.name}</td>
                     <td>{user.email}</td>
                     <td>{user.phone}</td>

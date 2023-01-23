@@ -8,13 +8,14 @@ const EditUser=()=>{
     const [email,setEmail]=useState('');
     const [phone,setPhone]=useState('');
     const [city,setCity]=useState('');
+    const [image,setImage]=useState('');
     const [msg,setMsg]=useState('');
     const {id}=useParams();
 
     useEffect(()=>{
         const viewdata=async()=>{
             try{
-                const response = await axios.get(`http://localhost/school/fetch.php?id=${id}`);
+                const response = await axios.get(`http://localhost/school/fetchUser.php?id=${id}`);
                 setName(response.data.name);
                 setEmail(response.data.email);
                 setPhone(response.data.phone);
@@ -30,16 +31,16 @@ const EditUser=()=>{
 
     const updateform = () =>{
 
-        const inputdata = {
-            id:id,
-            name:name,
-            email:email,
-            phone:phone,
-            city:city
-        }
+        const userobj = new FormData();
+        userobj.append('id',id);
+        userobj.append('name',name);
+        userobj.append('email',email);
+        userobj.append('phone',phone);
+        userobj.append('city',city);
+        userobj.append('photo',image)
 
         try{
-            const updateapi = axios.put(`http://localhost/school/update.php`,inputdata)
+            const updateapi = axios.post(`http://localhost/school/updateUser.php`,userobj)
             setMsg('User successfully updated');
         }
         catch(error){
@@ -58,20 +59,24 @@ const EditUser=()=>{
     {msg}
     </div>)}
     <div className="mb-3">
-    <label for="exampleFormControlInput1" className="form-label">Name</label>
+    <label htmlFor="exampleFormControlInput1" className="form-label">Name</label>
     <input type="text" className="form-control" value={name} onChange={(e)=>setName(e.target.value)}/>
     </div>
     <div className="mb-3">
-    <label for="exampleFormControlInput1" className="form-label">Email</label>
+    <label htmlFor="exampleFormControlInput1" className="form-label">Email</label>
     <input type="text" className="form-control" value={email} onChange={(e)=>setEmail(e.target.value)}/>
     </div>
     <div className="mb-3">
-    <label for="exampleFormControlInput1" className="form-label">Phone</label>
+    <label htmlFor="exampleFormControlInput1" className="form-label">Phone</label>
     <input type="text" className="form-control" value={phone} onChange={(e)=>setPhone(e.target.value)}/>
     </div>
     <div className="mb-3">
-    <label for="exampleFormControlInput1" className="form-label">City</label>
+    <label htmlFor="exampleFormControlInput1" className="form-label">City</label>
     <input type="text" className="form-control" value={city} onChange={(e)=>setCity(e.target.value)}/>
+    </div>
+    <div class="mb-3">
+    <label htmlFor="exampleFormControlInput1" class="form-label">Photo</label>
+    <input type="file" class="form-control" onChange={(e)=>setImage(e.target.files[0])}/>
     </div>
     <div className="mb-3">
     
