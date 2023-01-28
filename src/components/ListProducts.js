@@ -2,12 +2,18 @@ import React,{useEffect,useState} from "react";
 import axios from "axios";
 import {Link,useNavigate} from "react-router-dom";
 import Navbar from "./Navbar";
+import ReactPaginate from "react-paginate";
 
 const ListProducts = () => {
     
 
     const [products,setProducts]=useState([]);
     const [msg,setMsg]=useState();
+    
+    const [pageNumber,setPagenumber]=useState(0);
+    const perPage=5;
+    const perVisit=pageNumber*perPage;
+
 
     const navigate = useNavigate();
     
@@ -38,6 +44,12 @@ const ListProducts = () => {
         
     }
 
+    const pageCount=Math.ceil(products.length/perPage);
+
+    const pageChange=({selected})=>{
+        setPagenumber(selected);
+    }
+
     return<>
     <Navbar/>
     <div><br/></div>
@@ -61,8 +73,8 @@ const ListProducts = () => {
             </tr>
         </thead>
         <tbody>
-            {
-                products.map((product,index)=>(
+            { 
+                products.slice(perVisit,perVisit+perPage).map((product,index)=>(
                     <tr key={index}>
                     <td>{index+1}</td>
                     <td><img src={"http://localhost/school/upload/"+product.photo} width="60" height="60"/></td>
@@ -79,6 +91,13 @@ const ListProducts = () => {
 
         </tbody>
     </table>
+    <ReactPaginate
+    previousLabel={'Prev'}
+    nextLabel={'Next'}
+    pageCount={pageCount}
+    onPageChange={pageChange}
+    containerClassName={'pageCss'}
+    />
     </>
 }
 

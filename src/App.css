@@ -28,6 +28,21 @@ p{
   color: white;
 }
 
+.pageCss{
+  display: flex;
+  width: 70%;
+  padding: 10px;
+  list-style: none;
+  justify-content: center;
+}
+
+.pageCss a{
+  padding: 10px;
+  margin: 5px;
+  border: 1px solid cadetblue;
+  border-radius: 5px;
+}
+
 .App-link {
   color: #61dafb;
 }
